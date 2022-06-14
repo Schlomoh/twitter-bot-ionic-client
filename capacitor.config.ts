@@ -2,7 +2,7 @@ import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'io.ionic.starter',
-  appName: 'client',
+  appName: 'Twitter Bot Client',
   webDir: 'build',
   bundledWebRuntime: false
 };

@@ -1,0 +1,11 @@
+.centerContainer {
+    height: 40vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.centerContainer ion-icon {
+ font-size: 60px;
+}
