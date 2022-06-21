@@ -36,7 +36,7 @@ const Card = (props: CardProps) => {
     const { title, subtitle, children, badges } = props;
 
     return (
-        <IonCard >
+        <IonCard>
             <Badges badges={badges} />
             {title || subtitle ? (
                 <IonCardHeader>

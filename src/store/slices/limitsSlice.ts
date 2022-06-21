@@ -1,10 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface InteractionState {
-    follows: number;
-    likes: number;
-    comments: number;
+    [key: string]: number;
+    tweets: number;
     retweets: number;
+    comments: number;
+    likes: number;
+    follows: number;
     variation: number;
 }
 
@@ -20,10 +22,11 @@ interface InitialState extends InteractionState, IntervalState {
 }
 
 const initialState = {
-    follows: 0,
-    likes: 0,
-    comments: 0,
+    tweets: 0,
     retweets: 0,
+    comments: 0,
+    likes: 0,
+    follows: 0,
     variation: 0,
     workTime: 0,
     workVariation: 0,

@@ -16,6 +16,7 @@ interface ModalProps {
     initialBreakpoint?: number;
     fullscreen?: boolean;
     enableScroll?: boolean;
+    disabled?: boolean;
     openCallback?: () => void;
     children: React.ReactElement<any, any>;
 }
@@ -53,6 +54,7 @@ const Modal = ({
     initialBreakpoint,
     fullscreen,
     enableScroll,
+    disabled,
     openCallback,
     children,
 }: ModalProps) => {
@@ -81,7 +83,7 @@ const Modal = ({
                     </IonContent>
                 </ModalBaseContent>
             </IonModal>
-            <IonButton onClick={openModal} expand="block">
+            <IonButton onClick={openModal} expand="block" disabled={disabled}>
                 {buttonText}
             </IonButton>
         </>

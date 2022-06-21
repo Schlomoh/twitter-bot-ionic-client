@@ -25,8 +25,7 @@ const HashtagSettings = () => {
     // prettier-ignore
     const [setHashtags, { isLoading: isSetHashtagsLoading }] = useSetHashtagsMutation();
     //prettier-ignore
-    const { data: hashtags, isLoading: isHashtagsLoading, refetch: refetchTags } =
-        useGetHashtagsQuery();
+    const { data: hashtags, isLoading: isHashtagsLoading, refetch: refetchTags } = useGetHashtagsQuery();
     const [deleteHashtag] = useDeleteHashtagMutation();
 
     const HashtagChip = ({ text }: { text: string }) => {

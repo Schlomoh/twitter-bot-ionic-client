@@ -5,10 +5,10 @@ import {
     useGetIsAuthenticatedQuery,
 } from "../../store/fetching";
 
-interface ContentProps {}
-const Content = ({}: ContentProps) => {
+const Content = () => {
     const { refetch: refetchIsAuthed } = useGetIsAuthenticatedQuery();
     const { refetch: refetchHashtags } = useGetHashtagsQuery();
+
     const refresh = async (event: CustomEvent<RefresherEventDetail>) => {
         refetchIsAuthed();
         refetchHashtags();

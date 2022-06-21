@@ -16,10 +16,10 @@ export const authenticationApi = createApi({
             }),
         }),
 
-        getAuthLink: builder.query<{ url: string }, void>({
+        getAuthLink: builder.query<{url: string}, void>({
             query: () => ({
                 url: "/getLink",
-            }),
+            })
         }),
     }),
 });

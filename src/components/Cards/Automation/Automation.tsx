@@ -10,53 +10,23 @@ import {
     IonListHeader,
     IonRow,
 } from "@ionic/react";
-import { useGetIsAuthenticatedQuery } from "../../../store/fetching";
-import { useTSelector } from "../../../store/store";
 
+import { useGetIsAuthenticatedQuery } from "../../../store/fetching";
 import { BaseCard } from "../../BaseCard";
 import Controls from "./Controls";
-import HashtagSettings from "./HastagSettings";
-import LimitSettings from "./LimitSettings";
 
-const SettingsSection = () => (
-    <>
-        <IonListHeader>
-            <IonLabel>Settings</IonLabel>
-        </IonListHeader>
-        <IonGrid>
-            <IonRow>
-                <IonCol sizeXs="6">
-                    <HashtagSettings />
-                </IonCol>
-                <IonCol sizeXs="6">
-                    <LimitSettings />
-                </IonCol>
-            </IonRow>
-        </IonGrid>
-    </>
-);
+
 
 const Automation = () => {
-    const { data } = useGetIsAuthenticatedQuery();
-    const isAuthed = data?.isAuthenticated;
-    const badgeContent = isAuthed
-        ? { color: "success", text: "Authenticated" }
-        : { color: "danger", text: "Not Authenticated" };
-
-    const runningBadge = <IonBadge color="warning">Not running</IonBadge>;
-    const authedBadge = (
-        <IonBadge color={badgeContent.color}>{badgeContent.text}</IonBadge>
-    );
+   
 
     return (
         <BaseCard
             title="Automation"
             subtitle="Bot settings and data"
-            badges={[runningBadge, authedBadge]}
         >
             <>
                 <Controls />
-                <SettingsSection />
                 <IonListHeader>
                     <IonLabel>Data</IonLabel>
                 </IonListHeader>

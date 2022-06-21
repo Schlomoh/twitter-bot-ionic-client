@@ -1,7 +1,6 @@
 import {
     IonButton,
     IonButtons,
-    IonCardContent,
     IonContent,
     IonModal,
     IonIcon,
@@ -9,28 +8,22 @@ import {
     IonToolbar,
     IonTitle,
 } from "@ionic/react";
-import { link } from "ionicons/icons";
+import { link, shieldCheckmarkOutline, shieldOutline } from "ionicons/icons";
 import { useState } from "react";
 
 import {
-    useGetAuthLinkQuery,
     useGetIsAuthenticatedQuery,
+    useGetAuthLinkQuery,
 } from "../../../store/fetching";
-import { BaseCard } from "../../BaseCard";
 import { LoadingButton } from "../../LoadingButton";
 import "./Authentication.css";
 
 const ModalContent = ({ dismissModal }: { dismissModal: () => void }) => {
-    const { data: linkResponse, isLoading: authLinkLoading } =
-        useGetAuthLinkQuery();
+    const { data, isLoading: authLinkLoading } = useGetAuthLinkQuery();
 
     function authButtonClick() {
-        if (linkResponse) {
-            console.log(linkResponse);
-            console.log(linkResponse["url"]);
-            window.open(linkResponse.url, "_blank");
-            dismissModal();
-        }
+        window.open(data?.url, "_blank");
+        dismissModal();
     }
 
     return (
@@ -49,7 +42,7 @@ const ModalContent = ({ dismissModal }: { dismissModal: () => void }) => {
                     <LoadingButton
                         loading={authLinkLoading}
                         onInactiveClick={authButtonClick}
-                        active={!linkResponse}
+                        active={!data}
                         activeText="No Link"
                         inactiveText="Open Link"
                     />
@@ -59,24 +52,25 @@ const ModalContent = ({ dismissModal }: { dismissModal: () => void }) => {
     );
 };
 
-const Content = () => {
+const Authentication = () => {
     const [showModal, setShowModal] = useState(false);
-    const { data: statusData, isLoading: authenticatedLoading } =
-        useGetIsAuthenticatedQuery();
-
     const openModal = () => setShowModal(true);
     const dismissModal = () => setShowModal(false);
+    const { data: isAuthenticated } = useGetIsAuthenticatedQuery();
 
     return (
         <>
-            <LoadingButton
-                onActiveClick={openModal}
-                activeText="Show authentication link"
-                inactiveText="Authenticated"
-                loading={authenticatedLoading}
-                active={!statusData?.isAuthenticated} //swithed so the colors match when authenticated
-                disabledOnInactive
-            />
+            <IonButton
+                onClick={openModal}
+                fill="clear"
+                disabled={!!isAuthenticated}
+            >
+                <IonIcon
+                    icon={
+                        isAuthenticated ? shieldCheckmarkOutline : shieldOutline
+                    }
+                />
+            </IonButton>
             <IonModal
                 isOpen={showModal}
                 initialBreakpoint={0.5}
@@ -86,16 +80,6 @@ const Content = () => {
                 <ModalContent dismissModal={dismissModal} />
             </IonModal>
         </>
-    );
-};
-
-const Authentication = () => {
-    return (
-        <BaseCard title="Authentication" subtitle="Login stuff">
-            <IonCardContent>
-                <Content />
-            </IonCardContent>
-        </BaseCard>
     );
 };
 
